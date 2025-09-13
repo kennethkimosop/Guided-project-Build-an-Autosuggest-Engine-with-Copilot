@@ -164,3 +164,18 @@ public class Trie
         return d[m, n];
     }
 }
+
+// Search for a word in the trie
+public bool Search(string word)
+{
+    TrieNode current = root;
+    foreach (char c in word)
+    {
+        if (!current.HasChild(c))
+        {
+            return false;
+        }
+        current = current.Children[c];
+    }
+    return current.IsEndOfWord;
+}
