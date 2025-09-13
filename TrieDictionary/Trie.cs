@@ -65,9 +65,21 @@ public class Trie
         return null;
     }
 
-    public List<string> GetAllWords()
+    private List<string> GetAllWordsWithPrefix(TrieNode node, string prefix)
     {
-        return GetAllWordsWithPrefix(root, "");
+    List<string> words = new List<string>();
+
+    if (node.IsEndOfWord)
+    {
+        words.Add(prefix);
+    }
+
+    foreach (var child in node.Children)
+    {
+        words.AddRange(GetAllWordsWithPrefix(child.Value, prefix + child.Key));
+    }
+
+    return words;
     }
 
     public void PrintTrieStructure()
